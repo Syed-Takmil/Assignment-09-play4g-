@@ -17,7 +17,7 @@ const NavBar = () => {
 
 </>
     return (
-            <div className="navbar text-xl object-contain items-center justify-items-center justify-between  gap-1  shadow-md p-1">
+            <div className="navbar text-xl object-contain items-center justify-items-center justify-between  gap-1  shadow-md p-2">
     <div className="drawer md:hidden">
   <input id="my-drawer-1" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content">
@@ -44,8 +44,8 @@ const NavBar = () => {
 
 
   <div className='flex mr-6 justify-center font-semibold items-center gap-4'>
-    <button className='btn btn-secondary'>Log In</button>
-    <button className='btn btn-primary'>Sign Up</button>
+  <Link href="/login" className='btn bg-green-500 text-white font-medium'>LogIn</Link>
+    <Link href="/signup" className='btn bg-primary text-white font-medium'>SignUp</Link>
   </div>
 </div>
             
