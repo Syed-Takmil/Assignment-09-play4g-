@@ -1,11 +1,57 @@
+
+
+
+"use client"
+
 import React from 'react';
 import Button from '../../Components/shared/Button';
 import Link from 'next/link';
+import { authClient } from '../../lib/auth-client';
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
+
+
+const HandleSubmit = async (e) => {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+  const formData = new FormData(form);
+  const Userdata = Object.fromEntries(formData.entries());
+
+  // show loading toast and store id
+  const toastId = toast.loading("Logging in...");
+
+  const { data, error } = await authClient.signIn.email({
+    email: Userdata.email,
+    password: Userdata.password,
+    rememberMe: true,
+    callbackURL: "/",
+  });
+
+  // force minimum loading time (e.g. 1.5 seconds)
+  setTimeout(() => {
+    if (error) {
+      toast.update(toastId, {
+        render: error.message,
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
+    } else {
+      toast.update(toastId, {
+        render: "Login successful!",
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
+      });
+    }
+  }, 1500);
+};
     return (
 
         <form
+        onSubmit={HandleSubmit}
   className="bg-amber-100 grid text-xl my-5 hover:shadow-lg shadow-md transition-shadow duration-500 hover:-translate-y-2 border-base-300 rounded-box w-md mx-auto  p-4 md:p-8 hover:border"
 >
   <fieldset className="space-y-3">
@@ -13,11 +59,11 @@ const LoginPage = () => {
       Login
     </legend>
 
-    <label className="label">Email</label>
-    <input type="email" className="input w-full" placeholder="Email" />
+    <label className="label" >Email</label>
+    <input type="email" name='email' className="input w-full" placeholder="Email" required/>
 
-    <label className="label">Password</label>
-    <input type="password" className="input w-full" placeholder="Password" />
+    <label className="label" >Password</label>
+    <input type="password" name='password' className="input w-full" placeholder="Password" required />
 
     <div className="flex gap-4 m-3 justify-center items-center">
       <Button type="submit">Login</Button>
