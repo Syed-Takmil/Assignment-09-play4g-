@@ -14,7 +14,9 @@ import { FiLogOut } from 'react-icons/fi';
 const NavBar =() => {
   const { data: session } = authClient.useSession()
   const user=session?.user
- console.log(user)
+ const links1=<>
+ <NavLink href="/"><li>Home</li></NavLink>
+  <NavLink href="/facilities"><li>All Facilities</li></NavLink></>
   const links =<>
 <NavLink href="/"><li>Home</li></NavLink>
   <NavLink href="/facilities"><li>All Facilities</li></NavLink>
@@ -35,28 +37,41 @@ const NavBar =() => {
   <div className="drawer-side">
     <label htmlFor="my-drawer-1" aria-label="close sidebar" className="drawer-overlay"></label>
     <ul className="menu text-lg gap-5 h-full bg-base-200  w-80 p-4">
-      {links}
+      {user?links:links1}
     </ul>
   </div>
    
   </div>
 
       <Image 
-      className=' w-auto mr-3 lg:mr-8 mx-auto md:mx-0 h-auto '
+      className=' w-auto mr-5 lg:mr-8 mx-auto md:mx-0 h-auto '
       alt='logo' width={160} height={60} src='/logo.png'/>
 
-<ul className=" md:flex hidden justify-center gap-5 font-semibold items-center" >
-    {links}
+<ul className=" md:flex hidden justify-items-center justify-center gap-5 font-semibold items-center" >
+    {user?links:links1}
 </ul>
 
 {user?
-  <div className='flex flex-col md:flex-row mr-6 justify-center font-semibold items-center gap-3'>
-     <Image src={user?.image} width={40} height={40} alt="user photo"></Image>
- <p>Welcome, {user.name}</p>
-
-    <Link href="/signup" onClick={async()=> {await authClient.signOut()}} className='btn btn-lg bg-green-600 text-xl text-white font-medium'>LogOut
+  <div className='flex  mr-5 justify-center font-semibold items-center gap-3'>
+    
+     <div className="dropdown dropdown-bottom dropdown-end" >
+  <div tabIndex={0} role="button" className="btn btn-circle m-1">
+ <Image className='cursor-pointer rounded-full' src={user?.image} width={40} height={40} alt="user photo"></Image>
+  </div>
+  <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-5 gap-2 shadow-sm">
+<Link href="/bookings">My Bookings</Link>
+  <Link href="/add-facility"><li>Add Facility</li></Link>
+  <Link href="/manage-facilities"><li>Manage My Facilities</li></Link>
+  <Link href="/signup" onClick={async()=> {await authClient.signOut()}} className='btn btn-lg bg-green-600 text-xl text-white font-medium'>LogOut
     <FiLogOut/>
      </Link>
+  </ul>
+</div>
+     <p>Hello,
+      <br />{user.name}</p>
+ 
+
+    
   </div>
 :
   <div className='flex mr-4 justify-center font-semibold items-center gap-3'>
