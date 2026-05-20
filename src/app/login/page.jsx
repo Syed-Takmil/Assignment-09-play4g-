@@ -10,7 +10,11 @@ import { authClient } from '../../lib/auth-client';
 import { toast } from 'react-toastify';
 
 const LoginPage = () => {
-
+  const signIn = async () => {
+   const data = await authClient.signIn.social({
+     provider: "google",
+   });
+ };
 
 const HandleSubmit = async (e) => {
   e.preventDefault();
@@ -76,7 +80,8 @@ const HandleSubmit = async (e) => {
       </button>
     </div>
 
-    <button
+    <button 
+    onClick={signIn}
       type="button"
       className="btn rounded-3xl bg-white w-full text-black border-[#000000]"
     >

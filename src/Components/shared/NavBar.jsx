@@ -9,6 +9,7 @@ import React from 'react';
 import { FaAlignJustify } from 'react-icons/fa';
 import NavLink from './NavLink';
 import { authClient } from '../../lib/auth-client';
+import { FiLogOut } from 'react-icons/fi';
 
 const NavBar =() => {
   const { data: session } = authClient.useSession()
@@ -50,16 +51,17 @@ const NavBar =() => {
 
 {user?
   <div className='flex flex-col md:flex-row mr-6 justify-center font-semibold items-center gap-3'>
-     <Image src={user.image} width={40} height={40} alt="user's photo"></Image>
+     <Image src={user?.image} width={40} height={40} alt="user photo"></Image>
  <p>Welcome, {user.name}</p>
 
-    <Link href="/signup" onClick={async()=> {await authClient.signOut()}} className='btn bg-green-600 text-white font-medium'>LogOut
+    <Link href="/signup" onClick={async()=> {await authClient.signOut()}} className='btn btn-lg bg-green-600 text-xl text-white font-medium'>LogOut
+    <FiLogOut/>
      </Link>
   </div>
 :
-  <div className='flex mr-6 justify-center font-semibold items-center gap-4'>
-  <Link href="/login" className='btn bg-green-500 text-white font-medium'>LogIn</Link>
-    <Link href="/signup" className='btn bg-primary text-white font-medium'>SignUp</Link>
+  <div className='flex mr-4 justify-center font-semibold items-center gap-3'>
+  <Link href="/login" className='btn btn-lg bg-green-500 text-white font-medium'>LogIn</Link>
+    <Link href="/signup" className='btn btn-lg bg-primary text-white font-medium'>SignUp</Link>
   </div>
 }
 
