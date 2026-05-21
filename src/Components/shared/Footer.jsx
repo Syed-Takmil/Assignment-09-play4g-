@@ -7,6 +7,7 @@ const Footer = () => {
       <footer className=" text-lg  font-semibold footer footer-horizontal footer-center bg-base-300 text-base-content p-10">
   <aside>
   <Image 
+  loading='eager'
   src='/footer-logo.png' alt='logo' width={500} height={70} className='mix-blend-darken w-auto h-auto mx-auto'/>
     <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
   </aside>
