@@ -21,7 +21,12 @@ const BookingCard = ({ booking }) => {
      <div className="flex justify-between items-center flex-col md:flex-row gap-5">
 
          <div className="space-y-2 text-sm">
-             <h2 className="text-2xl font-bold mb-3">{facility_name}</h2>
+            <span className="flex justify-items-center gap-5">
+                 <h2 className="text-2xl font-bold mb-3">{facility_name}</h2>
+                 <span className="text-red-500 font-semibold btn btn-secondary btn-sm">
+                    pending
+                 </span>
+            </span>
     <p className="flex items-center gap-2">
           <FaCalendarAlt className="text-primary" />
           <span>Date: {booking_date}</span>
