@@ -51,7 +51,7 @@ const NavBar =() => {
       alt='logo' width={160} height={60} src='/logo.png'/>
 
 <ul className=" md:flex hidden justify-items-center justify-center gap-5 font-semibold items-center" >
-    {user?links:links1}
+    {user?links:links}
 </ul>
 
 {user?

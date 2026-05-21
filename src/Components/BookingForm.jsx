@@ -19,6 +19,7 @@ const BookingForm = ({facility}) => {
     const bookingData = Object.fromEntries(formData.entries());
 
     bookingData.total_price = totalPrice;
+    bookingData.image=facility.image
 
     fetch("http://localhost:5000/bookings",
         {

@@ -35,7 +35,7 @@ const { data, error } = await authClient.signUp.email({
     email: userData.email, // required
     password: userData.password, // required
     image: userData.image,
-    callbackURL:"/login",
+    callbackURL:"/",
 });
 
 if(error){
