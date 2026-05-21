@@ -35,13 +35,14 @@ const AddFacilityPage = () => {
   };
 
   return (
-      <div className="p-5">
+      <div className="p-5 grid gap-4 justify-center items-center ">
 
-        <h1 className="text-5xl mx-5 font-bold text-center ">
+        <h1 className="text-5xl my-6 font-bold text-center ">
           Add New Facility
         </h1>
 
-        <form onSubmit={HandleAddFacility} className="bg-base-300 grid items-center  gap-3 rounded-lg w-3xl mx-auto  p-5">
+        <form onSubmit={HandleAddFacility} className="bg-base-300  w-full
+        grid items-center  gap-3 rounded-box h-fit mx-auto  p-5">
 
           {/* Facility Name */}
           <div>

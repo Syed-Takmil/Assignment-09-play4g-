@@ -19,7 +19,7 @@ const Hero = () => {
       </h1>
 
       <p className="text-lg md:text-xl mb-8">
-        Discover top-quality sports venues for football, ক্রিকেট, badminton,
+        Discover top-quality sports venues for football, Cricket, badminton,
         tennis, and more. Easy booking, secure payments, and the best playing
         experience all in one place.
       </p>
@@ -30,7 +30,8 @@ const Hero = () => {
       </button></Link>
     </div>
   </div>
-</section>
+</section> 
+
 
 
     );

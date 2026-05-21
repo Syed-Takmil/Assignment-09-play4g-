@@ -10,6 +10,9 @@ import { FaAlignJustify } from 'react-icons/fa';
 import NavLink from './NavLink';
 import { authClient } from '../../lib/auth-client';
 import { FiLogOut } from 'react-icons/fi';
+import { BiArrowToBottom } from 'react-icons/bi';
+import { IoIosArrowDropdown } from 'react-icons/io';
+import { MdKeyboardArrowDown, MdKeyboardDoubleArrowDown } from 'react-icons/md';
 
 const NavBar =() => {
   const { data: session } = authClient.useSession()
@@ -54,8 +57,9 @@ const NavBar =() => {
 {user?
   <div className='flex  mr-5 justify-center font-semibold items-center gap-3'>
     
-     <div className="dropdown dropdown-bottom dropdown-end" >
-  <div tabIndex={0} role="button" className="btn btn-circle m-1">
+ 
+       <div className="dropdown dropdown-bottom dropdown-end" >
+  <div tabIndex={0} role="button" className="btn btn-circle  m-1">
  <Image className='cursor-pointer rounded-full' src={user?.image} width={40} height={40} alt="user photo"></Image>
   </div>
   <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-5 gap-2 shadow-sm">
@@ -69,10 +73,9 @@ const NavBar =() => {
 </div>
      <p>Hello,
       <br />{user.name}</p>
- 
-
-    
+      
   </div>
+
 :
   <div className='flex mr-4 justify-center font-semibold items-center gap-3'>
   <Link href="/login" className='btn btn-lg bg-green-500 text-white font-medium'>LogIn</Link>
