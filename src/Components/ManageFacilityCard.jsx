@@ -13,7 +13,6 @@ import { toast } from 'react-toastify';
 
 const ManageFacilityCard = ({ facility }) => {
 const Delete = async () => {
-
   await fetch(`http://localhost:5000/facilityDetails/${_id}`,{
     method:"DELETE"
   })

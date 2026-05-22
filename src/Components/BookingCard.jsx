@@ -1,9 +1,19 @@
+
+
+
+"use client"
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import React from "react";
+import { AiFillDelete } from "react-icons/ai";
 import { FaCalendarAlt, FaClock, FaMoneyBill, FaMapMarkerAlt } from "react-icons/fa";
+import { GoAlertFill } from "react-icons/go";
+import { toast } from "react-toastify";
 
 const BookingCard = ({ booking }) => {
+
   const {
+    _id,
     facility_name,
     booking_date,
     time_slot,
@@ -13,6 +23,20 @@ const BookingCard = ({ booking }) => {
     image,
     facility_id,
   } = booking;
+
+  const Delete = async () => {
+  
+    await fetch(`http://localhost:5000/bookings/${_id}`,{
+      method:"DELETE",
+      headers:{
+        "Content-Type":"application/json"
+      }
+    })
+  
+    toast.error("Booking Cancelled Successfully")
+  
+    redirect("/bookings")
+  }
 
   return (
     <div className="bg-base-300 rounded-box shadow-md p-5 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-transparent hover:border-primary">
@@ -44,6 +68,27 @@ const BookingCard = ({ booking }) => {
           <FaMoneyBill className="text-primary" />
           <span className="font-semibold">৳ {total_price}</span>
         </p>
+
+        <button
+        className='btn btn-error btn-outline'
+        onClick={() =>
+        document.getElementById(`delete_modal_${_id}`).showModal()
+        }
+        ><AiFillDelete />
+                    Delete</button>
+                   
+        <dialog id={`delete_modal_${_id}`} className="modal modal-bottom sm:modal-middle">
+          <div className="modal-box">
+            <h3 className="font-bold flex items-center justify-center gap-2 text-lg"> <GoAlertFill />Confirm</h3>
+            <p className="py-4">Are u Sure You want to Cancel this Booking ? </p>
+            <div className="modal-action">
+              <form method="dialog">
+                <button onClick={Delete} className="btn btn-error">
+                   <AiFillDelete/> Delete</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
 
       </div>
       <Image src={image} alt={facility_name} width={250} height={150} className=" rounded-box mt-4 object-cover" />
