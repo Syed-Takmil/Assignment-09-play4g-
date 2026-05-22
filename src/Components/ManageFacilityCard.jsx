@@ -2,15 +2,26 @@
 
 "use client"
 
+import { router } from 'better-auth/api';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import React, { useState } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { FaMapMarkerAlt, FaRegEdit } from 'react-icons/fa';
+import { GoAlertFill } from 'react-icons/go';
 import { toast } from 'react-toastify';
 
 const ManageFacilityCard = ({ facility }) => {
+const Delete = async () => {
 
+  await fetch(`http://localhost:5000/facilityDetails/${_id}`,{
+    method:"DELETE"
+  })
+
+  toast.error("Deleted Successfully")
+
+  redirect("/facilities")
+}
   const [formData, setFormData] = useState(facility)
 
   const {
@@ -40,7 +51,7 @@ const ManageFacilityCard = ({ facility }) => {
     await fetch(`http://localhost:5000/facilityDetails/${_id}`,{
       method:"PATCH",
       headers:{
-        "Content-Type":"application/json"
+        "content-Type":"application/json"
       },
       body:JSON.stringify(formData)
     })
@@ -94,11 +105,27 @@ const ManageFacilityCard = ({ facility }) => {
             Edit
           </button>
 
-          {/* DELETE BUTTON */}
-          <button className='btn btn-error btn-outline'>
-            <AiFillDelete />
-            Delete
-          </button>
+          {/* Open the modal using document.getElementById('ID').showModal() method */}
+<button
+className='btn btn-error btn-outline'
+onClick={() =>
+document.getElementById(`delete_modal_${_id}`).showModal()
+}
+><AiFillDelete />
+            Delete</button>
+           
+<dialog id={`delete_modal_${_id}`} className="modal modal-bottom sm:modal-middle">
+  <div className="modal-box">
+    <h3 className="font-bold flex items-center justify-center gap-2 text-lg"> <GoAlertFill />Confirm</h3>
+    <p className="py-4">Are u Sure You want to delete? </p>
+    <div className="modal-action">
+      <form method="dialog">
+        <button onClick={Delete} className="btn btn-error">
+           <AiFillDelete/> Delete</button>
+      </form>
+    </div>
+  </div>
+</dialog>
 
         </div>
 

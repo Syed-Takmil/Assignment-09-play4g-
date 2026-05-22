@@ -8,6 +8,7 @@ import { authClient } from "../../lib/auth-client";
 import { toast } from "react-toastify";
 
 import { json } from "better-auth";
+import { redirect } from "next/navigation";
 
 const AddFacilityPage = () => {
   const { data: session } = authClient.useSession();
@@ -32,6 +33,7 @@ const AddFacilityPage = () => {
         })
 
     toast.success("Facility Added Successfully!");
+    redirect("/facilities")
   };
 
   return (
