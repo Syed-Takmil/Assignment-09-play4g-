@@ -118,7 +118,16 @@ document.getElementById(`delete_modal_${_id}`).showModal()
     <h3 className="font-bold flex items-center justify-center gap-2 text-lg"> <GoAlertFill />Confirm</h3>
     <p className="py-4">Are u Sure You want to delete? </p>
     <div className="modal-action">
-      <form method="dialog">
+      <form method="dialog" className='flex items-center justify-center gap-2'>
+          <button
+                type="button"
+                onClick={() =>
+                  document.getElementById(`delete_modal_${_id}`).close()
+                }
+                className='btn btn-info'
+              >
+                Cancel
+              </button>
         <button onClick={Delete} className="btn btn-error">
            <AiFillDelete/> Delete</button>
       </form>
