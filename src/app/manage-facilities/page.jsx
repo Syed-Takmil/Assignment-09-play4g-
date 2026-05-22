@@ -1,11 +1,24 @@
 
 
 import React from 'react';
+import ManageFacilityCard from '../../Components/ManageFacilityCard';
 
-const ManageFacilitiesPage = () => {
+  export const metadata={
+    title:'Manage Facilities',
+    description:"Edit and Delete Facilities"
+  }
+const ManageFacilitiesPage = async() => {
+    const response = await fetch("http://localhost:5000/facilities", {
+    cache: "no-store",
+  });
+  const facilities = await response.json();
+
     return (
-        <div>
-            
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-5 p-5'>
+            {facilities.map(facility=>
+  <ManageFacilityCard key={facility._id} facility={facility}/>
+            )}
+          
         </div>
     );
 };
