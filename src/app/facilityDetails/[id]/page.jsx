@@ -12,7 +12,10 @@ import {
 } from "react-icons/fa";
 import BookingForm from "../../../Components/BookingForm";
 import Button from "../../../Components/shared/Button";
-
+export const metadata={
+  title:"Facility Details Page",
+  description:"Facility Details Page"
+}
 const FacilityDetailsPage = async ({ params }) => {
 
   const { id } = await params;

@@ -1,7 +1,12 @@
+
+
 import React from 'react';
 import BookingCard from '../../Components/BookingCard';
 
-
+export const metadata = {
+  title: "All Bookings",
+  description: "ALL Bookings done by the use are shown here",
+};
 
 const BookingsPage = async() => {
 
@@ -18,7 +23,7 @@ console.log(bookings)
     return (
         <div className='p-5 grid gap-4'>
            {
-            bookings.map(booking=>
+            [...bookings].reverse().map(booking=>
                 <BookingCard key={booking._id} booking={booking}></BookingCard>
             )
            }

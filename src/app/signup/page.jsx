@@ -87,7 +87,6 @@ else{
             name='image'
             className="input w-full"
             placeholder="Paste your image URL"
-            required
           />
 
           <label className="label">Password</label>

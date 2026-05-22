@@ -14,6 +14,7 @@ import { BiArrowToBottom } from 'react-icons/bi';
 import { IoIosArrowDropdown } from 'react-icons/io';
 import { MdKeyboardArrowDown, MdKeyboardDoubleArrowDown } from 'react-icons/md';
 import SkeletonCard from './SkeletonCard';
+import { RiArrowDownWideFill } from 'react-icons/ri';
 
 const NavBar =() => {
   const { data: session ,isPending} = authClient.useSession()
@@ -62,14 +63,19 @@ const NavBar =() => {
     <div className='flex mr-5 justify-center font-semibold items-center gap-3'>
 
       <div className="dropdown dropdown-bottom dropdown-end">
-        <div tabIndex={0} role="button" className="btn btn-circle m-1">
+        <div tabIndex={0} role="button" className="cursor-pointer   object-contain flex  items-center  w-full  bg-base-300  justify-center gap-1 mr-3 px-3 md:px-1 py-1 rounded-xl">
+                  <span>
+            <RiArrowDownWideFill />
+          </span>
           <Image
-            className='cursor-pointer rounded-full'
-            src={user?.image}
+            className='rounded-full'
+            src={(user?.image)||"/user.jpg"}
             width={40}
             height={40}
             alt="user photo"
           />
+          
+            
         </div>
 
         <ul

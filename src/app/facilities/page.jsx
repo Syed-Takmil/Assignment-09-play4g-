@@ -4,6 +4,10 @@
 import React from "react";
 import FacilityCard from "../../Components/FacilityCard";
 
+export const metadata={
+  title:"Play4G Facilities",
+  description:"All Facilities under Play4G are shown here"
+}
 const FacilitiesPage = async () => {
   const response = await fetch("http://localhost:5000/facilities", {
     cache: "no-store",

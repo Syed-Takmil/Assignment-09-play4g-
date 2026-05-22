@@ -5,6 +5,10 @@
 import Link from "next/link";
 import Image from "next/image";
 
+export const metadata={
+  title:"404 Play4G Page",
+  description:'Page Not Found'
+}
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center bg-cover bg-center justify-center bg-green-950 text-white p-4"
