@@ -13,9 +13,10 @@ import { FiLogOut } from 'react-icons/fi';
 import { BiArrowToBottom } from 'react-icons/bi';
 import { IoIosArrowDropdown } from 'react-icons/io';
 import { MdKeyboardArrowDown, MdKeyboardDoubleArrowDown } from 'react-icons/md';
+import SkeletonCard from './SkeletonCard';
 
 const NavBar =() => {
-  const { data: session } = authClient.useSession()
+  const { data: session ,isPending} = authClient.useSession()
   const user=session?.user
  const links1=<>
  <NavLink href="/"><li>Home</li></NavLink>
@@ -51,36 +52,75 @@ const NavBar =() => {
       alt='logo' width={160} height={60} src='/logo.png'/>
 
 <ul className=" md:flex hidden justify-items-center justify-center gap-5 font-semibold items-center" >
-    {user?links:links}
+    {user?links:links1}
 </ul>
 
-{user?
-  <div className='flex  mr-5 justify-center font-semibold items-center gap-3'>
-    
- 
-       <div className="dropdown dropdown-bottom dropdown-end" >
-  <div tabIndex={0} role="button" className="btn btn-circle  m-1">
- <Image className='cursor-pointer rounded-full' src={user?.image} width={40} height={40} alt="user photo"></Image>
-  </div>
-  <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-5 gap-2 shadow-sm">
-<Link href="/bookings">My Bookings</Link>
-  <Link href="/add-facility"><li>Add Facility</li></Link>
-  <Link href="/manage-facilities"><li>Manage My Facilities</li></Link>
-  <Link href="/signup" onClick={async()=> {await authClient.signOut()}} className='btn btn-lg bg-green-600 text-xl text-white font-medium'>LogOut
-    <FiLogOut/>
-     </Link>
-  </ul>
-</div>
-     <p>Hello,
-      <br />{user.name}</p>
-      
-  </div>
+{
+  isPending ? (
+      <SkeletonCard />
+  ) : user ? (
+    <div className='flex mr-5 justify-center font-semibold items-center gap-3'>
 
-:
-  <div className='flex mr-4 justify-center font-semibold items-center gap-3'>
-  <Link href="/login" className='btn btn-lg bg-green-500 text-white font-medium'>LogIn</Link>
-    <Link href="/signup" className='btn btn-lg bg-primary text-white font-medium'>SignUp</Link>
-  </div>
+      <div className="dropdown dropdown-bottom dropdown-end">
+        <div tabIndex={0} role="button" className="btn btn-circle m-1">
+          <Image
+            className='cursor-pointer rounded-full'
+            src={user?.image}
+            width={40}
+            height={40}
+            alt="user photo"
+          />
+        </div>
+
+        <ul
+          tabIndex={0}
+          className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-5 gap-2 shadow-sm"
+        >
+          <Link href="/bookings">My Bookings</Link>
+
+          <Link href="/add-facility">
+            <li>Add Facility</li>
+          </Link>
+
+          <Link href="/manage-facilities">
+            <li>Manage My Facilities</li>
+          </Link>
+
+          <Link
+            href="/signup"
+            onClick={async () => {
+              await authClient.signOut();
+            }}
+            className='btn btn-lg bg-green-600 text-xl text-white font-medium'
+          >
+            LogOut
+            <FiLogOut />
+          </Link>
+        </ul>
+      </div>
+
+      <p>
+        Hello,
+        <br />
+        {user.name}
+      </p>
+    </div>
+  ) : (
+    <div className='flex mr-4 justify-center font-semibold items-center gap-3'>
+      <Link
+        href="/login"
+        className='btn btn-lg bg-green-500 text-white font-medium'>
+        LogIn
+      </Link>
+
+      <Link
+        href="/signup"
+        className='btn btn-lg bg-primary text-white font-medium'
+      >
+        SignUp
+      </Link>
+    </div>
+  )
 }
 
 

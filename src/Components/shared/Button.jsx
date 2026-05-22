@@ -18,11 +18,12 @@ const StyledWrapper = styled.div`
   .button {
     cursor: pointer;
     position: relative;
-    padding: 7px 13px;
-    font-size: 18px;
-    color: rgb(0,0,0);
+    padding: 9px 13px;
+    font-size: 20px;
+    width:full
+    color: rgb(0,0,170);
     border: 2px solid rgb(19, 189, 0);
-    // border-radius: 34px;
+     border-radius: 4px;
     background-color: transparent;
     font-weight: 500;
     transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
@@ -44,13 +45,13 @@ const StyledWrapper = styled.div`
   }
 
   .button:hover::before {
-    scale: 3;
+    scale: 4;
   }
 
   .button:hover {
     color: #fdfffd;
-    scale: 1.1;
-    box-shadow: 0 0px 20px rgba(12, 192, 0,0.4);
+    scale: 1.3;
+    box-shadow: 0 0px 20px rgba(16, 192, 0,0.4);
     
   }
 

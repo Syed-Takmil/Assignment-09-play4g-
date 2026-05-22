@@ -8,6 +8,7 @@ import {
   FaUsers,
   FaClock,
   FaMoneyBillWave,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 import BookingForm from "../../../Components/BookingForm";
 import Button from "../../../Components/shared/Button";
@@ -33,46 +34,32 @@ const FacilityDetailsPage = async ({ params }) => {
     capacity,
     available_slots,
   } = facility;
-
   // reusable style
   const infoCard =
     "bg-base-300 rounded-2xl  p-5 font-semibold hover:-translate-y-2 transition-all duration-300 shadow-md hover:shadow-xl flex rounded-box items-center gap-3";
 
   return (
-    <div className="max-w-6xl justify-center grid items-center mx-auto p-10 space-y-8">
+    <div className="max-w-6xl justify-center grid items-center  p-5 gap-5">
 
   
-<div className="flex flex-col lg:flex-row gap-10 items-start">
-
-  {/* IMAGE SIDE */}
-  <div className="relative w-full lg:w-1/2 rounded-3xl overflow-hidden shadow-2xl">
-
-    <Image
+<div className="flex justify-items-center justify-center items-center flex-col lg:flex-row gap-10 ">
+ <div>
+   <h1 className=" text-4xl md:text-5xl font-bold p-8">
+        {facility_name}
+      </h1>
+     <Image
       src={image}
       width={600}
       height={600}
       alt={facility_name}
-      className="object-cover w-full h-auto"
+      className="object-cover rounded-3xl w-full h-auto"
     />
-
-    <div className="absolute inset-0 bg-black/40 flex items-end">
-
-      <h1 className="text-white text-4xl md:text-5xl font-bold p-8">
-        {facility_name}
-      </h1>
-
-    </div>
-
-  </div>
-
-  {/* INFO GRID */}
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full lg:w-1/2">
-
+        {/* INFO GRID */}
+  <div className="grid grid-cols-2 mt-5 justify-center items-center gap-5 ">
     <div className={infoCard}>
-      <FaMapMarkedAlt className="text-primary text-2xl" />
+      <FaMapMarkerAlt className="text-primary text-2xl" />
       <span>{location}</span>
     </div>
-
     <div className={infoCard}>
       <FaMoneyBillWave className="text-primary text-2xl" />
       <span>৳ {price_per_hour}/hour</span>
@@ -82,20 +69,22 @@ const FacilityDetailsPage = async ({ params }) => {
       <FaUsers className="text-primary text-2xl" />
       <span>Capacity: {capacity}</span>
     </div>
-
     <div className={infoCard}>
       <FaClock className="text-primary text-2xl" />
       <span>{available_slots}</span>
     </div>
-
-  </div>
-<a className="w-full mt-5" href='#booking-form'><Button>Book Now</Button></a>
+  
 </div>
-
-
-     <div id='booking-form' className="my-5">
+ </div>
+     
+ <div  className="my-10">
         <BookingForm facility={facility}/>
      </div>
+
+  </div>
+    
+  
+
 
     </div>
   );

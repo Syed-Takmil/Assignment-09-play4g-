@@ -12,7 +12,7 @@ const FacilitiesPage = async () => {
   const facilities = await response.json();
 
   return (
-    <div className=" grid-cols-3 md:grid-cols-2 rounded-box grid gap-5  p-10 mx-auto">
+    <div className=" rounded-box grid gap-5  p-10 mx-auto">
       {facilities.map((facility) => (
         <FacilityCard key={facility._id} facility={facility} />
       ))}

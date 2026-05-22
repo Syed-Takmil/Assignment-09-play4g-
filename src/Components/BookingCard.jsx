@@ -23,7 +23,7 @@ const BookingCard = ({ booking }) => {
          <div className="space-y-2 text-sm">
             <span className="flex justify-items-center gap-5">
                  <h2 className="text-2xl font-bold mb-3">{facility_name}</h2>
-                 <span className="text-red-500 font-semibold btn btn-secondary btn-sm">
+                 <span className=" badge badge-secondary text-white font-semibold">
                     pending
                  </span>
             </span>
