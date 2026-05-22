@@ -1,5 +1,7 @@
 
 
+
+
 "use client"
 
 import { router } from 'better-auth/api';
@@ -12,8 +14,9 @@ import { GoAlertFill } from 'react-icons/go';
 import { toast } from 'react-toastify';
 
 const ManageFacilityCard = ({ facility }) => {
+  
 const Delete = async () => {
-  await fetch(`http://localhost:5000/facilityDetails/${_id}`,{
+  await fetch(`${process.env.NEXT_PUBLIC_URL}/facilityDetails/${_id}`,{
     method:"DELETE"
   })
 
@@ -47,7 +50,7 @@ const Delete = async () => {
   const handleUpdate = async (e) => {
     e.preventDefault()
     console.log(formData)
-    await fetch(`http://localhost:5000/facilityDetails/${_id}`,{
+    await fetch(`${process.env.NEXT_PUBLIC_URL}/facilityDetails/${_id}`,{
       method:"PATCH",
       headers:{
         "content-Type":"application/json"

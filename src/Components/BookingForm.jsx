@@ -22,7 +22,7 @@ const BookingForm = ({facility}) => {
     bookingData.total_price = totalPrice;
     bookingData.image=facility.image
 
-    fetch("http://localhost:5000/bookings",
+    fetch(`${process.env.NEXT_PUBLIC_URL}/bookings`,
         {
             method:"POST",
             headers:{

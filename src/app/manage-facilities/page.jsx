@@ -8,7 +8,7 @@ import ManageFacilityCard from '../../Components/ManageFacilityCard';
     description:"Edit and Delete Facilities"
   }
 const ManageFacilitiesPage = async() => {
-    const response = await fetch("http://localhost:5000/facilities", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/facilities`, {
     cache: "no-store",
   });
   const facilities = await response.json();

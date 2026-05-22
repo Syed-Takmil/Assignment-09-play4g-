@@ -1,7 +1,11 @@
 
 
+
+
 import React from 'react';
 import BookingCard from '../../Components/BookingCard';
+import { auth } from '../../lib/auth';
+import { headers } from 'next/headers';
 
 export const metadata = {
   title: "All Bookings",
@@ -9,17 +13,25 @@ export const metadata = {
 };
 
 const BookingsPage = async() => {
+  const {token}=await auth.api.getToken({
+    headers: await headers()
+  })
 
-    const response=await fetch("http://localhost:5000/bookings",
-         {
+
+   const response = await fetch(
+  `${process.env.NEXT_PUBLIC_URL}/bookings`,
+  {
     cache: "no-store",
+
+    headers: {
+      authorization: `Bearer ${token}`
+    }
   }
-    )
+)
      if (!response.ok) {
     return <div>Failed to load bookings</div>;
   }
     const bookings=await response.json()
-console.log(bookings)
     return (
         <div className='p-5 grid gap-4'>
            {

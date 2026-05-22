@@ -21,7 +21,7 @@ const FacilityDetailsPage = async ({ params }) => {
   const { id } = await params;
 
   const response = await fetch(
-    `http://localhost:5000/facilityDetails/${id}`,
+    `${process.env.NEXT_PUBLIC_URL}/facilityDetails/${id}`,
     {
       cache: "no-store",
     }

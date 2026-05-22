@@ -1,25 +1,64 @@
+"use client"
 
-
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FacilityCard from "../../Components/FacilityCard";
 
-export const metadata={
-  title:"Play4G Facilities",
-  description:"All Facilities under Play4G are shown here"
-}
-const FacilitiesPage = async () => {
-  const response = await fetch("http://localhost:5000/facilities", {
-    cache: "no-store",
-  });
+const FacilitiesPage = () => {
 
-  const facilities = await response.json();
+  const [facilities, setFacilities] = useState([]);
+  const [search, setSearch] = useState("");
+  const [sportType, setSportType] = useState("");
+
+  useEffect(() => {
+
+    fetch(
+      `${process.env.NEXT_PUBLIC_URL}/facilities?search=${search}&sportType=${sportType}`,
+    )
+      .then(res => res.json())
+      .then(data => setFacilities(data));
+
+  }, [search, sportType]);
 
   return (
-    <div className=" rounded-box grid gap-5  p-10 mx-auto">
-      {facilities.map((facility) => (
-        <FacilityCard key={facility._id} facility={facility} />
-      ))}
+
+    <div className="p-10 space-y-6">
+      <div className="flex flex-col md:flex-row gap-4">
+
+        <input
+          type="text"
+          placeholder="Search Facility..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="input input-bordered w-full"
+        />
+
+        <select
+          value={sportType}
+          onChange={(e) => setSportType(e.target.value)}
+          className="select select-bordered w-full md:w-72"
+        >
+          <option value="">All Sports</option>
+          <option value="Cricket Ground">Cricket</option>
+          <option value="Basketball Court">Basketball</option>
+          <option value="Badminton Court">Badminton</option>
+          <option value="Gym">Gym</option>
+        </select>
+
+      </div>
+
+      {/* FACILITIES */}
+
+      <div className="grid gap-5">
+
+        {facilities.map((facility) => (
+          <FacilityCard
+            key={facility._id}
+            facility={facility}
+          />
+        ))}
+
+      </div>
+
     </div>
   );
 };

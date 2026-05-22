@@ -26,7 +26,7 @@ const BookingCard = ({ booking }) => {
 
   const Delete = async () => {
   
-    await fetch(`http://localhost:5000/bookings/${_id}`,{
+    await fetch(`${process.env.NEXT_PUBLIC_URL}/bookings/${_id}`,{
       method:"DELETE",
       headers:{
         "Content-Type":"application/json"
