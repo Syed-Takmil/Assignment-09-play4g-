@@ -23,7 +23,7 @@ const AddFacilityPage = () => {
 
     console.log(facilityData);
 
-    fetch("http://localhost:5000/facilities",
+    fetch(`${process.env.NEXT_PUBLIC_URL}/facilities`,
         {
             method:"POST",
             headers:{
