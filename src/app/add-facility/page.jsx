@@ -49,7 +49,6 @@ return ( <div className="p-5 grid gap-4 justify-center items-center">
   <form onSubmit={HandleAddFacility} className="bg-base-300  w-full
         grid items-center  gap-3 rounded-box h-fit mx-auto  p-5">
 
-          {/* Facility Name */}
           <div>
             <label className="label font-semibold">
               Facility Name
@@ -73,7 +72,7 @@ return ( <div className="p-5 grid gap-4 justify-center items-center">
 
             <select
               name="facility_type"
-              className="select p-2 rounded-full bg-white select-bordered w-full"
+              className="select p-2 rounded-full bg-base-300 select-bordered w-full"
               required
             >
               <option value="">Select Type</option>
@@ -101,7 +100,6 @@ return ( <div className="p-5 grid gap-4 justify-center items-center">
           </div>
 </div>
 
-          {/* Location */}
           <div>
             <label className="label font-semibold">
               Location
@@ -116,7 +114,7 @@ return ( <div className="p-5 grid gap-4 justify-center items-center">
             />
           </div>
 
-          {/* Price */}
+        
           <div>
             <label className="label font-semibold">
               Price Per Hour
@@ -130,8 +128,6 @@ return ( <div className="p-5 grid gap-4 justify-center items-center">
               required
             />
           </div>
-
-          {/* Capacity */}
           <div>
             <label className="label font-semibold">
               Capacity
@@ -146,7 +142,7 @@ return ( <div className="p-5 grid gap-4 justify-center items-center">
             />
           </div>
 
-          {/* Available Time Slots */}
+        
           <div>
             <label className="label font-semibold">
               Available Time Slots
@@ -161,7 +157,7 @@ return ( <div className="p-5 grid gap-4 justify-center items-center">
             />
           </div>
 
-          {/* Description */}
+       
           <div>
             <label className="label font-semibold">
               Description
@@ -170,12 +166,11 @@ return ( <div className="p-5 grid gap-4 justify-center items-center">
             <textarea
               name="description"
               placeholder="Write facility details..."
-              className="textarea bg-white p-3 border textarea-bordered w-full h-32"
+              className="textarea bg-base-200  p-3 border textarea-bordered w-full h-32"
               required
             ></textarea>
           </div>
 
-          {/* Owner Email */}
           <div>
             <label className="label font-semibold">
               Owner Email
@@ -190,7 +185,6 @@ return ( <div className="p-5 grid gap-4 justify-center items-center">
             />
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="btn btn-primary w-full text-lg"

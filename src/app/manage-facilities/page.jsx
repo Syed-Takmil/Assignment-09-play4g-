@@ -6,7 +6,6 @@ import ManageFacilityCard from '../../Components/ManageFacilityCard';
 import { auth } from '../../lib/auth';
 import { headers } from 'next/headers';
 import Link from 'next/link';
-import Button from '../../Components/shared/Button';
 import { BiPlus } from 'react-icons/bi';
 
 export const metadata = {
@@ -74,9 +73,7 @@ const ManageFacilitiesPage = async () => {
                 <ManageFacilityCard
                   key={facility._id}
                   facility={facility}
-                />
-              ))
-            }
+                />))   }
 
           </div>
 
