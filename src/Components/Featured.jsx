@@ -12,7 +12,7 @@ export default async function Featured() {
 
   const facilities = await res.json();
 
-  const featured = facilities.slice(0, 6);
+  const featured = facilities.slice(0, 4);
 
   return (
     <section className="p-10">

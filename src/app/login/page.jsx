@@ -23,7 +23,6 @@ const HandleSubmit = async (e) => {
   const formData = new FormData(form);
   const Userdata = Object.fromEntries(formData.entries());
 
-  // show loading toast and store id
   const toastId = toast.loading("Logging in...");
 
   const { data, error } = await authClient.signIn.email({
@@ -33,7 +32,6 @@ const HandleSubmit = async (e) => {
     callbackURL: "/",
   });
 
-  // force minimum loading time (e.g. 1.5 seconds)
   setTimeout(() => {
     if (error) {
       toast.update(toastId, {

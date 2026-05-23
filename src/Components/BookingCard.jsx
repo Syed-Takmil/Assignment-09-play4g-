@@ -83,6 +83,15 @@ const BookingCard = ({ booking }) => {
             <p className="py-4">Are u Sure You want to Cancel this Booking ? </p>
             <div className="modal-action">
               <form method="dialog">
+                  <button
+                type="button"
+                onClick={() =>
+                  document.getElementById(`delete_modal_${_id}`).close()
+                }
+                className='btn btn-info'
+              >
+                Cancel
+              </button>
                 <button onClick={Delete} className="btn btn-error">
                    <AiFillDelete/> Delete</button>
               </form>
