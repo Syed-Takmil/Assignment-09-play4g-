@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import Button from './shared/Button';
 import { toast } from 'react-toastify';
 import { redirect } from 'next/navigation';
+import { authClient } from '../lib/auth-client';
 
 const BookingForm = ({facility}) => {
   const [hours, setHours] = useState(1);
@@ -13,7 +14,10 @@ const BookingForm = ({facility}) => {
 
     e.preventDefault();
 
-    const form = e.currentTarget;
+    const {data} = await authClient.token();
+    const token=data?.token;
+    console.log(token);
+    const form = e.target;
 
     const formData = new FormData(form);
 
@@ -25,9 +29,10 @@ const BookingForm = ({facility}) => {
     fetch(`${process.env.NEXT_PUBLIC_URL}/bookings`,
         {
             method:"POST",
-            headers:{
-            "content-type":'application/json'
-        },
+         headers: {
+    "content-Type": "application/json",
+    authorization:`Bearer ${token}`
+  },
         body:JSON.stringify(bookingData)
         })
 

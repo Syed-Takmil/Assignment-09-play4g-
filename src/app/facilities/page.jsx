@@ -2,12 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import FacilityCard from "../../Components/FacilityCard";
+import SkeletonFacilityCards from "../../Components/SkeletonFacilityCards";
 
 const FacilitiesPage = () => {
 
   const [facilities, setFacilities] = useState([]);
   const [search, setSearch] = useState("");
   const [sportType, setSportType] = useState("");
+  const[loading,setLoading]=useState(true)
 
   useEffect(() => {
 
@@ -16,6 +18,7 @@ const FacilitiesPage = () => {
     )
       .then(res => res.json())
       .then(data => setFacilities(data));
+      setLoading(false)
 
   }, [search, sportType]);
 
@@ -47,8 +50,8 @@ const FacilitiesPage = () => {
       </div>
 
       {/* FACILITIES */}
-
-      <div className="grid gap-5">
+{loading? <SkeletonFacilityCards/>:
+<div className="grid gap-5">
 
         {facilities.map((facility) => (
           <FacilityCard
@@ -57,7 +60,8 @@ const FacilitiesPage = () => {
           />
         ))}
 
-      </div>
+      </div>}
+      
 
     </div>
   );

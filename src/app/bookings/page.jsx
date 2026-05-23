@@ -1,39 +1,37 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import BookingCard from '../../Components/BookingCard';
 import { auth } from '../../lib/auth';
 import { headers } from 'next/headers';
 
 export const metadata = {
   title: "All Bookings",
-  description: "ALL Bookings done by the use are shown here",
+  description: "ALL Bookings done by the user are shown here",
 };
 
 const BookingsPage = async () => {
+  
 
-  const tokenData = await auth.api.getToken({
+  const {token} = await auth.api.getToken({
     headers: await headers()
   });
 
-  console.log(tokenData);
-
-  const token = tokenData?.token;
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/bookings`,
     {
       cache: "no-store",
-
-      headers: {
-        authorization: `Bearer ${token}`
-      }
+     headers:{
+            authorization:`Bearer ${token}`
+          }
     }
   );
 
-  console.log(response.status);
-
   if (!response.ok) {
-    return <div>Failed to load bookings</div>;
+    return (
+      <div className="p-5">
+        Failed to load bookings
+      </div>
+    );
   }
 
   const bookings = await response.json();
@@ -53,4 +51,3 @@ const BookingsPage = async () => {
 };
 
 export default BookingsPage;
-

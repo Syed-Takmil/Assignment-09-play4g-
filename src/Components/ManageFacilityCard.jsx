@@ -3,8 +3,6 @@
 
 
 "use client"
-
-import { router } from 'better-auth/api';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import React, { useState } from 'react';
@@ -12,12 +10,19 @@ import { AiFillDelete } from 'react-icons/ai';
 import { FaMapMarkerAlt, FaRegEdit } from 'react-icons/fa';
 import { GoAlertFill } from 'react-icons/go';
 import { toast } from 'react-toastify';
+import { authClient } from '../lib/auth-client';
 
 const ManageFacilityCard = ({ facility }) => {
   
 const Delete = async () => {
+   const {data} = await authClient.token();
+ const token=data?.token;
+//  console.log(token);
   await fetch(`${process.env.NEXT_PUBLIC_URL}/facilityDetails/${_id}`,{
-    method:"DELETE"
+    method:"DELETE",
+    headers:{
+      authorization: `Bearer ${token}`
+    }
   })
 
   toast.error("Deleted Successfully")
@@ -48,12 +53,18 @@ const Delete = async () => {
   }
 
   const handleUpdate = async (e) => {
-    e.preventDefault()
+     e.preventDefault()
+
+    const {data} = await authClient.token();
+ const token=data?.token;
+ console.log(token);
     console.log(formData)
     await fetch(`${process.env.NEXT_PUBLIC_URL}/facilityDetails/${_id}`,{
       method:"PATCH",
       headers:{
-        "content-Type":"application/json"
+        "content-Type":"application/json",
+        authorization:`Bearer ${token}`
+    
       },
       body:JSON.stringify(formData)
     })

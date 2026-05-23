@@ -1,49 +1,52 @@
-
-
-
 "use client";
 
 import React from "react";
 import { authClient } from "../../lib/auth-client";
 import { toast } from "react-toastify";
-
-import { json } from "better-auth";
 import { redirect } from "next/navigation";
 
 const AddFacilityPage = () => {
-  const { data: session } = authClient.useSession();
 
-  const HandleAddFacility = async (e) => {
-    e.preventDefault();
+const { data: session } = authClient.useSession();
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+const HandleAddFacility = async (e) => {
 
-    const facilityData = Object.fromEntries(formData.entries());
+e.preventDefault();
 
-    console.log(facilityData);
+const {data} = await authClient.token();
+const token=data?.token;
+// console.log(token);
 
-    fetch(`${process.env.NEXT_PUBLIC_URL}/facilities`,
-        {
-            method:"POST",
-            headers:{
-            "content-type":'application/json'
-        },
-        body:JSON.stringify(facilityData)
-        })
+const formData = new FormData(e.target);
 
-    toast.success("Facility Added Successfully!");
-    redirect("/facilities")
-  };
+const facilityData = Object.fromEntries(formData.entries());
 
-  return (
-      <div className="p-5 grid gap-4 justify-center items-center ">
+console.log(facilityData);
 
-        <h1 className="text-5xl my-6 font-bold text-center ">
-          Add New Facility
-        </h1>
+await fetch(`${process.env.NEXT_PUBLIC_URL}/facilities`, {
+  method: "POST",
+  headers: {
+    "content-Type": "application/json",
+    authorization:`Bearer ${token}`
+  },
+  body: JSON.stringify(facilityData),
+});
 
-        <form onSubmit={HandleAddFacility} className="bg-base-300  w-full
+toast.success("Facility Added Successfully!");
+
+redirect("/add-facility")
+
+
+};
+
+return ( <div className="p-5 grid gap-4 justify-center items-center">
+
+
+  <h1 className="text-5xl my-6 font-bold text-center">
+    Add New Facility
+  </h1>
+
+  <form onSubmit={HandleAddFacility} className="bg-base-300  w-full
         grid items-center  gap-3 rounded-box h-fit mx-auto  p-5">
 
           {/* Facility Name */}
@@ -195,10 +198,10 @@ const AddFacilityPage = () => {
             Add Facility
           </button>
         </form>
-      </div>
+</div>
 
-  );
+
+);
 };
 
 export default AddFacilityPage;
-

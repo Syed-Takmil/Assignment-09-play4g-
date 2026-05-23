@@ -12,6 +12,8 @@ import {
 } from "react-icons/fa";
 import BookingForm from "../../../Components/BookingForm";
 import Button from "../../../Components/shared/Button";
+import { auth } from "../../../lib/auth";
+import { headers } from "next/headers";
 export const metadata={
   title:"Facility Details Page",
   description:"Facility Details Page"
@@ -20,15 +22,21 @@ const FacilityDetailsPage = async ({ params }) => {
 
   const { id } = await params;
 
+const {token}=await auth.api.getToken({
+  headers: await headers()
+})
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/facilityDetails/${id}`,
     {
       cache: "no-store",
+      headers:{
+        authorization:`Bearer ${token}`
+      }
     }
   );
 
   const facility = await response.json();
-
+console.log(facility)
   const {
     facility_name,
     location,
