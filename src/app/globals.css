@@ -8,4 +8,6 @@
 
 @import "tailwindcss";
 @plugin "daisyui";
-
+html {
+  transition: all 0.2s ease;
+}

@@ -15,6 +15,7 @@ import { IoIosArrowDropdown } from 'react-icons/io';
 import { MdKeyboardArrowDown, MdKeyboardDoubleArrowDown } from 'react-icons/md';
 import SkeletonCard from './SkeletonCard';
 import { RiArrowDownWideFill } from 'react-icons/ri';
+import ThemeToggle from '../ThemeToggle';
 
 const NavBar =() => {
   const { data: session ,isPending} = authClient.useSession()
@@ -56,6 +57,7 @@ const NavBar =() => {
     {user?links:links1}
 </ul>
 
+<ThemeToggle/>
 {
   isPending ? (
       <SkeletonCard />

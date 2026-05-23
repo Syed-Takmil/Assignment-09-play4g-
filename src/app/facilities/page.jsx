@@ -17,8 +17,9 @@ const FacilitiesPage = () => {
       `${process.env.NEXT_PUBLIC_URL}/facilities?search=${search}&sportType=${sportType}`,
     )
       .then(res => res.json())
-      .then(data => setFacilities(data));
-      setLoading(false)
+      .then(data => {setFacilities(data)
+     setLoading(false)});
+     
 
   }, [search, sportType]);
 
