@@ -1,7 +1,3 @@
-
-
-
-
 "use client"
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
@@ -13,9 +9,6 @@ import { toast } from 'react-toastify';
 import { authClient } from '../lib/auth-client';
 
 const ManageFacilityCard = ({ facility }) => {
-const { data: session } = authClient.useSession();
-  const isOwner = session?.user?.email === facility.owner_email;
-
   const [formData, setFormData] = useState(facility)
 
   const {
@@ -31,43 +24,38 @@ const { data: session } = authClient.useSession();
   } = facility
 
   const Delete = async () => {
-  let isSuccessful = false;
+    let isSuccessful = false;
 
-  try {
-    const { data } = await authClient.token();
-    const token = data?.token;
+    try {
+      const { data } = await authClient.token();
+      const token = data?.token;
 
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/facilityDetails/${_id}`,
-      {
-        method: "DELETE",
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/facilityDetails/${_id}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error("Server error");
       }
-    );
 
-    if (res.status === 403) {
-      toast.error("You are not the Owner. You are not allowed to delete this");
-      return;
+      toast.success("Deleted Successfully");
+      isSuccessful = true; 
+
+    } catch (err) {
+      toast.error("Something went wrong");
     }
 
-
-    if (!res.ok) {
-      throw new Error("Server error");
+    if (isSuccessful) {
+      redirect("/facilities");
     }
+  };
 
-    toast.success("Deleted Successfully");
-    isSuccessful = true; 
-
-  } catch (err) {
-    toast.error("Something went wrong");
-  }
-
-  if (isSuccessful) {
-    redirect("/facilities");
-  }
-};
   const handleChange = (e) => {
     const { name, value } = e.target
 
@@ -78,18 +66,16 @@ const { data: session } = authClient.useSession();
   }
 
   const handleUpdate = async (e) => {
-     e.preventDefault()
+    e.preventDefault()
 
     const {data} = await authClient.token();
- const token=data?.token;
-//  console.log(token);
-    // console.log(formData)
+    const token=data?.token;
+
     await fetch(`${process.env.NEXT_PUBLIC_URL}/facilityDetails/${_id}`,{
       method:"PATCH",
       headers:{
         "content-Type":"application/json",
         authorization:`Bearer ${token}`
-    
       },
       body:JSON.stringify(formData)
     })
@@ -133,50 +119,41 @@ const { data: session } = authClient.useSession();
         <div className='flex gap-3 justify-end m-5 font-semibold items-center'>
 
           <button
-  disabled={!isOwner}
-  onClick={() => {
-    if (!isOwner) {
-      toast.error("You are not the owner of this facility");
-      return;
-    }
-    document.getElementById(`edit_modal_${_id}`).showModal();
-  }}
-  className={`btn ${isOwner ? "btn-accent" : "btn-disabled"}`}
->
-  <FaRegEdit />
-  Edit
-</button>
+            onClick={() => document.getElementById(`edit_modal_${_id}`).showModal()}
+            className="btn btn-accent"
+          >
+            <FaRegEdit />
+            Edit
+          </button>
 
-          {/* Open the modal using document.getElementById('ID').showModal() method */}
-<button
-className='btn btn-error btn-outline'
-onClick={() =>
-document.getElementById(`delete_modal_${_id}`).showModal()
-}
-><AiFillDelete />
-            Delete</button>
-           
-<dialog id={`delete_modal_${_id}`} className="modal modal-bottom sm:modal-middle">
-  <div className="modal-box">
-    <h3 className="font-bold flex items-center justify-center gap-2 text-lg"> <GoAlertFill />Confirm</h3>
-    <p className="py-4">Are u Sure You want to delete? </p>
-    <div className="modal-action">
-      <form method="dialog" className='flex items-center justify-center gap-2'>
           <button
-                type="button"
-                onClick={() =>
-                  document.getElementById(`delete_modal_${_id}`).close()
-                }
-                className='btn btn-info'
-              >
-                Cancel
-              </button>
-        <button onClick={Delete} className="btn btn-error">
-           <AiFillDelete/> Delete</button>
-      </form>
-    </div>
-  </div>
-</dialog>
+            className="btn btn-error btn-outline"
+            onClick={() => document.getElementById(`delete_modal_${_id}`).showModal()}
+          >
+            <AiFillDelete />
+            Delete
+          </button>
+           
+          <dialog id={`delete_modal_${_id}`} className="modal modal-bottom sm:modal-middle">
+            <div className="modal-box">
+              <h3 className="font-bold flex items-center justify-center gap-2 text-lg"> <GoAlertFill />Confirm</h3>
+              <p className="py-4">Are you sure you want to delete?</p>
+              <div className="modal-action">
+                <form method="dialog" className='flex items-center justify-center gap-2'>
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById(`delete_modal_${_id}`).close()}
+                    className='btn btn-info'
+                  >
+                    Cancel
+                  </button>
+                  <button onClick={Delete} className="btn btn-error">
+                    <AiFillDelete/> Delete
+                  </button>
+                </form>
+              </div>
+            </div>
+          </dialog>
 
         </div>
 
@@ -285,9 +262,7 @@ document.getElementById(`delete_modal_${_id}`).showModal()
 
               <button
                 type="button"
-                onClick={() =>
-                  document.getElementById(`edit_modal_${_id}`).close()
-                }
+                onClick={() => document.getElementById(`edit_modal_${_id}`).close()}
                 className='btn'
               >
                 Cancel
