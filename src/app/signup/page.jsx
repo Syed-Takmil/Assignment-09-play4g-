@@ -57,7 +57,10 @@ else{
     >
       <form
         onSubmit={HandleSubmit}
-        className="backdrop-blur-md bg-white/80 grid text-xl my-4 shadow-xl transition-all duration-500 border-base-300 rounded-box w-full max-w-md  p-4 md:p-8 hover:border-green-500 border-2"
+        className="backdrop-blur-md
+           text-xl my-4 shadow-xl transition-all duration-500 border-base-300  max-w-md  p-4 md:p-8 hover:border-green-500 border-2
+         bg-base-300  w-full
+        grid items-center  gap-3 rounded-box h-fit mx-auto "
       >
         <fieldset className="space-y-2">
           <legend className="fieldset-legend text-2xl font-bold mb-4 text-center">

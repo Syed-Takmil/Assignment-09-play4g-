@@ -54,7 +54,8 @@ const HandleSubmit = async (e) => {
 
         <form
         onSubmit={HandleSubmit}
-  className="bg-amber-100 grid text-xl my-5 hover:shadow-lg shadow-md transition-shadow duration-500 hover:-translate-y-2 border-base-300 rounded-box w-md mx-auto  p-4 md:p-8 hover:border"
+  className=
+  "text-xl my-5 hover:shadow-lg shadow-md transition-shadow duration-500 hover:-translate-y-2 border-base-300   p-4 md:p-8 hover:border bg-base-300  w-md grid items-center  gap-3 rounded-box h-fit mx-auto "
 >
   <fieldset className="space-y-3">
     <legend className="fieldset-legend text-xl font-semibold mb-4">
