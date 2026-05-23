@@ -1,7 +1,4 @@
 
-
-
-
 import React from 'react';
 import BookingCard from '../../Components/BookingCard';
 import { auth } from '../../lib/auth';
@@ -12,35 +9,48 @@ export const metadata = {
   description: "ALL Bookings done by the use are shown here",
 };
 
-const BookingsPage = async() => {
-  const {token}=await auth.api.getToken({
+const BookingsPage = async () => {
+
+  const tokenData = await auth.api.getToken({
     headers: await headers()
-  })
+  });
 
+  console.log(tokenData);
 
-   const response = await fetch(
-  `${process.env.NEXT_PUBLIC_URL}/bookings`,
-  {
-    cache: "no-store",
+  const token = tokenData?.token;
 
-    headers: {
-      authorization: `Bearer ${token}`
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/bookings`,
+    {
+      cache: "no-store",
+
+      headers: {
+        authorization: `Bearer ${token}`
+      }
     }
-  }
-)
-     if (!response.ok) {
+  );
+
+  console.log(response.status);
+
+  if (!response.ok) {
     return <div>Failed to load bookings</div>;
   }
-    const bookings=await response.json()
-    return (
-        <div className='p-5 grid gap-4'>
-           {
-            [...bookings].reverse().map(booking=>
-                <BookingCard key={booking._id} booking={booking}></BookingCard>
-            )
-           }
-        </div>
-    );
+
+  const bookings = await response.json();
+
+  return (
+    <div className='p-5 grid gap-4'>
+      {
+        [...bookings].reverse().map(booking =>
+          <BookingCard
+            key={booking._id}
+            booking={booking}
+          />
+        )
+      }
+    </div>
+  );
 };
 
 export default BookingsPage;
+
