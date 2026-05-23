@@ -2,13 +2,13 @@
 
 
 
-# 🏟️ Play4G – Frontend
+# Play4G – Frontend
 
 A modern sports facility booking frontend built with Next.js.
 
 ---
 
-## 🚀 Purpose
+##  Purpose
 
 This frontend allows users to:
 - Browse sports facilities
@@ -19,13 +19,13 @@ This frontend allows users to:
 
 ---
 
-## 🌐 Live URL
+##  Live URL
 
 https://assignment-09-play4g.vercel.app
 
 ---
 
-## ✨ Features
+## Features
 
 - Authentication (login/register)
 - Facility listing page (dynamic from API)
@@ -38,7 +38,7 @@ https://assignment-09-play4g.vercel.app
 
 ---
 
-## 📦 NPM Packages Used
+##  NPM Packages Used
 
 - next
 - react-icons
@@ -49,7 +49,7 @@ https://assignment-09-play4g.vercel.app
 
 ---
 
-## 🔐 Auth System
+##  Auth System
 
 - JWT-based authentication
 - Token fetched via Better Auth client
@@ -57,7 +57,7 @@ https://assignment-09-play4g.vercel.app
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - Next.js (App Router)
 - Tailwind CSS + DaisyUI
@@ -65,6 +65,6 @@ https://assignment-09-play4g.vercel.app
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 Syed Takmil
