@@ -13,22 +13,9 @@ import { toast } from 'react-toastify';
 import { authClient } from '../lib/auth-client';
 
 const ManageFacilityCard = ({ facility }) => {
-  
-const Delete = async () => {
-   const {data} = await authClient.token();
- const token=data?.token;
-//  console.log(token);
-  await fetch(`${process.env.NEXT_PUBLIC_URL}/facilityDetails/${_id}`,{
-    method:"DELETE",
-    headers:{
-      authorization: `Bearer ${token}`
-    }
-  })
+const { data: session } = authClient.useSession();
+  const isOwner = session?.user?.email === facility.owner_email;
 
-  toast.error("Deleted Successfully")
-
-  redirect("/facilities")
-}
   const [formData, setFormData] = useState(facility)
 
   const {
@@ -43,6 +30,44 @@ const Delete = async () => {
     description
   } = facility
 
+  const Delete = async () => {
+  let isSuccessful = false;
+
+  try {
+    const { data } = await authClient.token();
+    const token = data?.token;
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/facilityDetails/${_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (res.status === 403) {
+      toast.error("You are not the Owner. You are not allowed to delete this");
+      return;
+    }
+
+
+    if (!res.ok) {
+      throw new Error("Server error");
+    }
+
+    toast.success("Deleted Successfully");
+    isSuccessful = true; 
+
+  } catch (err) {
+    toast.error("Something went wrong");
+  }
+
+  if (isSuccessful) {
+    redirect("/facilities");
+  }
+};
   const handleChange = (e) => {
     const { name, value } = e.target
 
@@ -57,8 +82,8 @@ const Delete = async () => {
 
     const {data} = await authClient.token();
  const token=data?.token;
- console.log(token);
-    console.log(formData)
+//  console.log(token);
+    // console.log(formData)
     await fetch(`${process.env.NEXT_PUBLIC_URL}/facilityDetails/${_id}`,{
       method:"PATCH",
       headers:{
@@ -107,16 +132,20 @@ const Delete = async () => {
 
         <div className='flex gap-3 justify-end m-5 font-semibold items-center'>
 
-          {/* EDIT BUTTON */}
           <button
-            onClick={() =>
-              document.getElementById(`edit_modal_${_id}`).showModal()
-            }
-            className='btn btn-accent text-black font-semibold btn-soft'
-          >
-            <FaRegEdit />
-            Edit
-          </button>
+  disabled={!isOwner}
+  onClick={() => {
+    if (!isOwner) {
+      toast.error("You are not the owner of this facility");
+      return;
+    }
+    document.getElementById(`edit_modal_${_id}`).showModal();
+  }}
+  className={`btn ${isOwner ? "btn-accent" : "btn-disabled"}`}
+>
+  <FaRegEdit />
+  Edit
+</button>
 
           {/* Open the modal using document.getElementById('ID').showModal() method */}
 <button

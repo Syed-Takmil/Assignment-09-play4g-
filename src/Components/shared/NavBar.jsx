@@ -32,7 +32,7 @@ const NavBar =() => {
 
 </>
     return (
-            <div className="navbar text-xl object-contain items-center justify-items-center justify-between  gap-1  shadow-md p-2">
+            <div className="navbar grid grid-cols-3 md:flex text-xl object-contain items-center justify-items-center justify-between  gap-1  shadow-md py-3 px-7 md:p-4">
     <div className="drawer md:hidden">
   <input id="my-drawer-1" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content">
@@ -114,7 +114,7 @@ const NavBar =() => {
       </p>
     </div>
   ) : (
-    <div className='flex mr-4 justify-center font-semibold items-center gap-3'>
+    <div className='flex  w-1/2 mx-auto md:mx-3 justify-center font-semibold items-center gap-3 px-6'>
       <Link
         href="/login"
         className='btn btn-lg bg-green-500 text-white font-medium'>

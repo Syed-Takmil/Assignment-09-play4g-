@@ -21,7 +21,7 @@ const formData = new FormData(e.target);
 
 const facilityData = Object.fromEntries(formData.entries());
 
-console.log(facilityData);
+// console.log(facilityData);
 
 await fetch(`${process.env.NEXT_PUBLIC_URL}/facilities`, {
   method: "POST",
@@ -34,7 +34,7 @@ await fetch(`${process.env.NEXT_PUBLIC_URL}/facilities`, {
 
 toast.success("Facility Added Successfully!");
 
-redirect("/add-facility")
+redirect("/facilities")
 
 
 };

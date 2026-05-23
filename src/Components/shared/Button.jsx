@@ -50,7 +50,7 @@ const StyledWrapper = styled.div`
 
   .button:hover {
     color: #fdfffd;
-    scale: 1.3;
+    scale: 1.15;
     box-shadow: 0 0px 20px rgba(16, 192, 0,0.4);
     
   }
